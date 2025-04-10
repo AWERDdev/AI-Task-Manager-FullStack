@@ -74,7 +74,7 @@ temp/
 *.sketch
 
 # Ignore the API folder
-API/
+# API/
 
 # Logs
 logs
