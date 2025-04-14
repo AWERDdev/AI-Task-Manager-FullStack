@@ -1,4 +1,5 @@
 import { useState } from "react";
+import config from '../Config';
 
 /**
  * Email validation function
@@ -58,7 +59,6 @@ export const useFormValidation = () => {
   };
 };
 
-
 /**
  * Send login data to the server
  * @param {string} email - User email
@@ -66,54 +66,56 @@ export const useFormValidation = () => {
  * @returns {Promise<Object>} Result of the login attempt
  */
 export const sendLoginData = async (email, password) => {
-    try {
-      const response = await fetch('http://localhost:3500/api/login', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password }),
-      });
-  
-      const data = await response.json();
+  try {
+    const response = await fetch(`${config.nodeApiUrl}/api/login`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email, password }),
+    });
+    
+    const data = await response.json();
+    if (config.enableDebugMode) {
       console.log("Server Response:", data);
-  
-      if (response.ok) {
-        localStorage.setItem('token', data.token);
-        return { success: true };
-      } else {
-        return { success: false, message: data.message, status: response.status };
-      }
-    } catch (error) {
-      console.error(`Network Error: ${error}`);
-      return { success: false, message: "Network error", status: 500 };
     }
-  };
-  
-  /**
-   * Handle login error responses
-   * @param {Object} result - API response result
-   * @returns {Object} Formatted errors
-   */
-  export const handleLoginErrors = (result) => {
-    let newErrors = {};
     
-    if (result.status === 400) {
-      newErrors.email = result.message || "Invalid input. Please check your details.";
-      newErrors.password = "";
-    } else if (result.status === 404) {
-      newErrors.email = result.message || "Email not found.";
-    } else if (result.status === 401) {
-      newErrors.password = result.message || "Incorrect password.";
+    if (response.ok) {
+      localStorage.setItem('token', data.token);
+      return { success: true };
     } else {
-      newErrors.email = "Something went wrong. Please try again later.";
-      newErrors.password = "";
+      return { success: false, message: data.message, status: response.status };
     }
-    
-    return newErrors;
-  };
+  } catch (error) {
+    if (config.enableDebugMode) {
+      console.error(`Network Error: ${error}`);
+    }
+    return { success: false, message: "Network error", status: 500 };
+  }
+};
 
+/**
+ * Handle login error responses
+ * @param {Object} result - API response result
+ * @returns {Object} Formatted errors
+ */
+export const handleLoginErrors = (result) => {
+  let newErrors = {};
+  
+  if (result.status === 400) {
+    newErrors.email = result.message || "Invalid input. Please check your details.";
+    newErrors.password = "";
+  } else if (result.status === 404) {
+    newErrors.email = result.message || "Email not found.";
+  } else if (result.status === 401) {
+    newErrors.password = result.message || "Incorrect password.";
+  } else {
+    newErrors.email = "Something went wrong. Please try again later.";
+    newErrors.password = "";
+  }
+  
+  return newErrors;
+};
 
-
-  /**
+/**
  * Validates signup form data
  * @param {Object} formData - The form data to validate
  * @returns {Object} Object containing errors and isValid flag
@@ -153,8 +155,6 @@ export const validateSignupForm = (formData) => {
  * @param {Function} validateFn - Validation function
  * @returns {Object} Form state and handlers
  */
-
-
 export const useForm = (initialValues, validateFn) => {
   const [formData, setFormData] = useState(initialValues);
   const [errors, setErrors] = useState({});
@@ -187,61 +187,60 @@ export const useForm = (initialValues, validateFn) => {
     resetForm
   };
 };
+
 /**
  * Validates password input
  * @param {string} password - The password to validate
- * @param {string} confirmPassword - The confirmation password
  * @returns {Object} Object containing errors and isValid flag
  */
 export const validatePassword = (password) => {
   let errors = {};
-
   // Ensure password is a string to avoid type errors
   if (typeof password !== "string") {
     password = "";
   }
-
   if (!password.trim()) {
     errors.password = "Password is required";
   } else if (password.length < 8) {
     errors.password = "Password must be at least 8 characters long";
   }
-
   return {
     errors,
     isValid: Object.keys(errors).length === 0,
   };
 };
 
-
-import { validatePassword as validatePasswordHelper } from "./validationUtils";
-
+/**
+ * Custom hook for password validation
+ * @returns {Object} Password state and validation functions
+ */
 export const usePasswordValidation = () => {
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState({});
-
-  const validatePassword = () => {
-    const { errors, isValid } = validatePasswordHelper(password);
+  
+  const validatePasswordField = () => {
+    const { errors, isValid } = validatePassword(password);
     setErrors(errors); // Updates errors state
     return isValid;
   };
-
+  
   return {
     password,
     setPassword,
     errors,
     setErrors,
-    validatePassword,
+    validatePassword: validatePasswordField,
   };
 };
 
 /**
  * Custom hook for bios validation
+ * @returns {Object} Bios state and validation functions
  */
 export const useBiosValidation = () => {
   const [bios, setBios] = useState("");
   const [biosErrors, setBiosErrors] = useState({}); // Changed from BiosErrors to biosErrors for consistency
-
+  
   const validateBios = () => {
     // Simple validation for now
     let errors = {};
@@ -258,7 +257,7 @@ export const useBiosValidation = () => {
     setBiosErrors(errors);
     return isValid;
   };
-
+  
   return {
     bios,
     setBios,
@@ -268,7 +267,11 @@ export const useBiosValidation = () => {
   };
 };
 
-// Add the validateBios helper function if it doesn't exist elsewhere
+/**
+ * Validates bios input
+ * @param {string} bios - The bios to validate
+ * @returns {Object} Object containing errors and isValid flag
+ */
 export const validateBios = (bios) => {
   let biosErrors = {};
   let isValid = true;
@@ -283,4 +286,3 @@ export const validateBios = (bios) => {
   
   return { biosErrors, isValid };
 };
-

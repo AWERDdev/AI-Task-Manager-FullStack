@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import config from '../Config';
 
 /**
  * Custom hook to fetch and manage user data
@@ -19,7 +20,7 @@ export const useUser = () => {
     }
 
     try {
-      const response = await fetch("http://localhost:3500/api/user", {
+      const response = await fetch(`${config.nodeApiUrl}/api/user`, {
         method: "GET",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -28,17 +29,23 @@ export const useUser = () => {
       });
 
       const data = await response.json();
-
+      
       if (response.ok) {
         setUser(data.user);
-        console.log("Fetched user data:", data.user);
+        if (config.enableDebugMode) {
+          console.log("Fetched user data:", data.user);
+        }
       } else {
         setError(data.message || "Failed to fetch user data");
-        console.error("Error fetching user:", data.message);
+        if (config.enableDebugMode) {
+          console.error("Error fetching user:", data.message);
+        }
       }
     } catch (error) {
       setError("Network error");
-      console.error("Fetch error:", error);
+      if (config.enableDebugMode) {
+        console.error("Fetch error:", error);
+      }
     } finally {
       setLoading(false);
     }
@@ -47,6 +54,7 @@ export const useUser = () => {
   // Function to log out the user
   const logoutUser = () => {
     localStorage.removeItem("token");
+    localStorage.removeItem("user"); // Also remove user data from localStorage
     setUser(null);
   };
 
