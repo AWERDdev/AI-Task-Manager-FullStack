@@ -1,4 +1,4 @@
-import { FaBell, FaCog, FaSignOutAlt, FaUser, FaSignInAlt } from "react-icons/fa";
+import { FaSignOutAlt, FaUser, FaSignInAlt } from "react-icons/fa";
 import { useNavigate } from "react-router";
 import { useUser } from "../tools/FetchUserData";
 import { usePasswordValidation,useBiosValidation } from "../tools/validationUtils";
@@ -91,12 +91,6 @@ const handleSubmitBios = async (e) => {
             <ul className="space-y-4">
               <li className="flex items-center space-x-2 p-2 bg-gray-800 rounded-lg cursor-pointer">
                 <FaUser /> <span>Account</span>
-              </li>
-              <li className="flex items-center space-x-2 p-2 hover:bg-gray-800 rounded-lg cursor-pointer">
-                <FaBell /> <span>Notifications</span>
-              </li>
-              <li className="flex items-center space-x-2 p-2 hover:bg-gray-800 rounded-lg cursor-pointer">
-                <FaCog /> <span>Preferences</span>
               </li>
               {user ? (
                 <li
