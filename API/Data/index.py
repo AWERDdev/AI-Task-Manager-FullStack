@@ -135,3 +135,4 @@ def home():
 def test_error():
     # This will trigger our custom error handler
     raise ValueError("This is a test error to check error handling")
+

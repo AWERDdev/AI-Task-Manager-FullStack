@@ -12,9 +12,15 @@ const port = process.env.PORT || 3500;
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// CORS Setup
 app.use(cors({
-  origin: ['https://stockmarket-frontend-ebon.vercel.app', 'http://localhost:5173','http://localhost:5174','http://localhost:5175'],
+  origin: [
+    'https://task-manager-full-stack-ebon.vercel.app', 
+    'http://localhost:5173',
+    'http://localhost:5174',
+    'http://localhost:5175',
+    'https://your-frontend-vercel-url.vercel.app',
+    'https://your-api-vercel-url.vercel.app'
+  ],
   credentials: true
 }));
 
