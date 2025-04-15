@@ -13,6 +13,7 @@ router = APIRouter()
 # Connect to MongoDB using PyMongo
 client = MongoClient('mongodb://127.0.0.1:27017/')
 db = client['TaskMasterPublic']
+# db = client['TaskMaster'] Private server
 tasks_collection = db['tasks']
 
 # Global variables for task storage and indexing
