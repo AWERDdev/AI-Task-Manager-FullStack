@@ -47,7 +47,8 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 # Connect to MongoDB using mongoengine
-connect('TaskMaster', host='mongodb://127.0.0.1:27017/')
+#TaskMaster
+connect('TaskMasterPublic', host='mongodb://127.0.0.1:27017/')
 
 # Define a MongoEngine model for the Task (ensure consistency with your schema)
 class Task(Document):
