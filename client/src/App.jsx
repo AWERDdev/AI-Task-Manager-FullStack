@@ -5,9 +5,9 @@ import MainAppSideBar from "./Components/MainAppSideBar";
 import Button from "./Components/Button";
 import TaskCard from "./Components/TaskCard";
 import { useEffect, useState, useCallback } from "react";
-import { useSidebar } from "./tools/sidebarUtils";
-import { useNavigation } from "./tools/navigationUtils";
-import { RequestTasks, DeleteTask } from "./tools/TaskRequester";
+import { useSidebar } from "./Tools/sidebarUtils";
+import { useNavigation } from "./Tools/navigationUtils";
+import { RequestTasks, DeleteTask } from "./Tools/TaskRequester";
 import { TokenRequest, CombinedSearch } from "./Tools/SearchRequester";
 import debounce from "lodash.debounce";
 

@@ -3,7 +3,7 @@ import NoAuthNavNoOutline from "../Components/NoAuthNavNoOutline";
 import NoAuthSideBar from "../Components/SideBar";
 
 // tools
-import { useSidebar } from "../tools/sidebarUtils";
+import { useSidebar } from "../Tools/sidebarUtils";
 import {
   useTaskFormValidation,
   sendTaskData,

@@ -1,8 +1,8 @@
 import { FaSignOutAlt, FaUser, FaSignInAlt } from "react-icons/fa";
 import { useNavigate } from "react-router";
-import { useUser } from "../tools/FetchUserData";
-import { usePasswordValidation,useBiosValidation } from "../tools/validationUtils";
-import {handlePasswordErrors,sendNewPassword,sendBios} from "../tools/authUtils";
+import { useUser } from "../Tools/FetchUserData";
+import { usePasswordValidation,useBiosValidation } from "../Tools/validationUtils";
+import {handlePasswordErrors,sendNewPassword,sendBios} from "../Tools/authUtils";
 // import { useState } from "react";
 function Profile() {
   const { user, loading, logoutUser } = useUser();

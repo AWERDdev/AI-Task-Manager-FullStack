@@ -6,7 +6,7 @@ export default defineConfig({
   plugins: [
     react(),
     {
-      name: tailwindcss,
+      name: 'tailwindcss',
       apply: 'post',
       enforce: 'post',
       transformIndexHtml() {

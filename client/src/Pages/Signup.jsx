@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 // Import our utility functions
 import { useForm, validateSignupForm } from "../Tools/validationUtils";
 import { sendSignupData } from "../Tools/authUtils";
-import { useSidebar } from "../tools/sidebarUtils";
+import { useSidebar } from "../Tools/sidebarUtils";
 
 function Signup() {
   // Use our sidebar utility

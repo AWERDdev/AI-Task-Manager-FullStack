@@ -2,10 +2,10 @@ import NavBarNoOutline from "../Components/NavBarNoOutline";
 import SideBar from "../Components/SideBar";
 
 // Import our utility functions
-import { useSidebar } from "../tools/sidebarUtils";
-import { useNavigation } from "../tools/navigationUtils";
-import { useFormValidation } from "../tools/validationUtils";
-import { sendLoginData, handleLoginErrors } from "../tools/authUtils";
+import { useSidebar } from "../Tools/sidebarUtils";
+import { useNavigation } from "../Tools/navigationUtils";
+import { useFormValidation } from "../Tools/validationUtils";
+import { sendLoginData, handleLoginErrors } from "../Tools/authUtils";
 
 function Login() {
   // Use our custom hooks
