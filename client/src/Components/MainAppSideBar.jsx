@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import Button from "./Button";
-import { useNavigation } from "../tools/navigationUtils";
+import { useNavigation } from "../Tools/navigationUtils";
 
 function MainAppSideBar({
   // Search props
