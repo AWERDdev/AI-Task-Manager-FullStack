@@ -1,9 +1,23 @@
 import { defineConfig } from 'vite'
-import tailwindcss from '@tailwindcss/vite'
-import React from '@vitejs/plugin-react'
+import react from '@vitejs/plugin-react'
+import tailwindcss from 'tailwindcss'
+
 export default defineConfig({
   plugins: [
-    React(),
-    tailwindcss(),
+    react(),
+    {
+      name: tailwindcss,
+      apply: 'post',
+      enforce: 'post',
+      transformIndexHtml() {
+        return [
+          {
+            tag: 'link',
+            attrs: { rel: 'stylesheet', href: '/src/index.css' },
+            injectTo: 'head',
+          },
+        ]
+      },
+    },
   ],
 })
