@@ -5,8 +5,8 @@ import tailwindcss from 'tailwindcss'
 export default defineConfig({
   plugins: [
     react(),
+    tailwindcss(),
     {
-      name: tailwindcss,
       apply: 'post',
       enforce: 'post',
       transformIndexHtml() {
