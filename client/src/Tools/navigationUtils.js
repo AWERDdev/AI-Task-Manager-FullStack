@@ -9,10 +9,10 @@ export const useNavigation = () => {
   
   const goToSignup = () => navigate("/Signup");
   const goToLogin = () => navigate("/login");
-  const goToDashboard = () => navigate("/");
+  const goToDashboard = () => navigate("/App");
   const goToCreateTask = () => navigate("/CreateTask");
   const gotToProfile = () => navigate("/profile");
-  const goToIntro = () => navigate("/Intro");
+  const goToIntro = () => navigate("/");
   return {
     navigate,
     goToSignup,
