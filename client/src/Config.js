@@ -4,7 +4,7 @@ const isProduction = import.meta.env?.MODE === 'production';
 const config = {
   // API URLs
   nodeApiUrl: isProduction
-    ? 'https://task-manager-backend-six-beige.vercel.app' // Replace with your public server URL
+    ? 'https://aff3-41-46-57-203.ngrok-free.app' // Replace with your public server URL
     : import.meta.env?.VITE_NODE_API_URL || 'http://localhost:3500',
 
   pythonApiUrl: isProduction
