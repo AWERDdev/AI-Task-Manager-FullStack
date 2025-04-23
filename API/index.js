@@ -14,16 +14,18 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use(cors({
   origin: [
-    'https://task-manager-full-stack-orcin.vercel.app/', 
+    'https://task-manager-full-stack-orcin.vercel.app', 
+    'https://task-manager-full-stack-orcin.vercel.app/',
     'http://localhost:5173',
     'http://localhost:5174',
     'http://localhost:5175',
     'https://your-frontend-vercel-url.vercel.app',
     'https://your-api-vercel-url.vercel.app'
   ],
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true
 }));
-
 // API Routes
 app.get('/', (req, res) => {
   res.status(200).json({ message: 'Welcome to Node API 👍👍',job:"The main API for the Task Master app and gateway"});
