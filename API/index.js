@@ -19,8 +19,7 @@ app.use(cors({
     'http://localhost:5173',
     'http://localhost:5174',
     'http://localhost:5175',
-    'https://your-frontend-vercel-url.vercel.app',
-    'https://your-api-vercel-url.vercel.app'
+    'https://task-manager-backend-six-beige.vercel.app/'
   ],
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
