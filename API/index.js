@@ -14,7 +14,7 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use(cors({
   origin: [
-    'https://task-manager-full-stack.vercel.app', 
+    'https://task-manager-full-stack-orcin.vercel.app/', 
     'http://localhost:5173',
     'http://localhost:5174',
     'http://localhost:5175',
