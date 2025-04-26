@@ -1,0 +1,25 @@
+name: Deploy Express API to Koyeb
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Trigger Koyeb Redeploy
+        run: |
+          curl -X POST https://app.koyeb.com/v1/services/abcdef1234567890/redeploy \
+            -H "Authorization: Bearer ${{ secrets.KOYEB_API_TOKEN }}"
+
+      - name: Wait for Koyeb to restart
+        run: sleep 30
+
+      - name: Test API Health
+        run: |
+          curl --fail https://quick-marion-awerddev-c9f60f67.koyeb.app/
